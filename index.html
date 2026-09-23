@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imobiliária Habitar | Encontre seu imóvel em Goioerê e Região</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#0F2C59',
+                            blue: '#005B96',
+                            accent: '#FF6B35',
+                            light: '#F8FAFC'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #005B96; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- TOPBAR -->
+    <div class="bg-brand-navy text-white text-xs py-2 px-4 border-b border-slate-700">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <span><i class="fa-solid fa-location-dot text-brand-accent mr-1"></i> Av. Moisés Lupion, 96 - Jardim Lindóia, Goioerê - PR</span>
+                <span class="hidden md:inline"><i class="fa-solid fa-certificate text-brand-accent mr-1"></i> CRECI J-6100</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="tel:44991579229" class="hover:text-brand-accent"><i class="fa-solid fa-phone mr-1"></i> (44) 99157-9229</a>
+                <button onclick="toggleAdminModal()" class="bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded text-xs transition"><i class="fa-solid fa-lock mr-1"></i> Painel Admin</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- LOGO -->
+            <a href="#" onclick="showSection('home')" class="flex items-center space-x-2">
+                <div class="bg-brand-navy text-white p-2 rounded-lg font-bold text-xl tracking-wider">HABITAR</div>
+                <div class="flex flex-col leading-tight">
+                    <span class="font-bold text-brand-navy tracking-tight text-lg">IMOBILIÁRIA</span>
+                    <span class="text-[10px] text-slate-500 tracking-widest uppercase">Goioerê & Região</span>
+                </div>
+            </a>
+
+            <!-- NAV LINKS -->
+            <nav class="hidden lg:flex items-center space-x-6 text-sm font-medium text-slate-700">
+                <a href="#" onclick="showSection('home')" class="hover:text-brand-blue transition">Início</a>
+                <a href="#" onclick="showSection('imoveis', 'comprar')" class="hover:text-brand-blue transition">Comprar</a>
+                <a href="#" onclick="showSection('imoveis', 'alugar')" class="hover:text-brand-blue transition">Alugar</a>
+                <a href="#" onclick="showSection('vender')" class="hover:text-brand-blue transition">Venda/Alugue seu Imóvel</a>
+                <a href="#" onclick="showSection('sobre')" class="hover:text-brand-blue transition">Sobre</a>
+                <a href="#" onclick="showSection('blog')" class="hover:text-brand-blue transition">Blog</a>
+                <a href="#" onclick="showSection('contato')" class="hover:text-brand-blue transition">Contato</a>
+            </nav>
+
+            <!-- ACTION BUTTONS -->
+            <div class="flex items-center space-x-3">
+                <button onclick="showSection('favoritos')" class="relative p-2 text-slate-600 hover:text-red-500 transition" title="Favoritos">
+                    <i class="fa-solid fa-heart text-xl"></i>
+                    <span id="fav-count" class="absolute -top-1 -right-1 bg-brand-accent text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                </button>
+                <a href="https://wa.me/5544991579229?text=Olá,%20gostaria%20de%20mais%20informações" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium text-sm flex items-center space-x-2 transition shadow">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span class="hidden sm:inline">WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTAINER PRINCIPAL PARA CONTEÚDO DINÂMICO -->
+    <main id="main-content" class="flex-grow">
+        <!-- SEÇÃO HOME -->
+        <section id="sec-home">
+            <!-- HERO / BUSCA -->
+            <div class="relative bg-brand-navy py-20 px-4 text-white bg-cover bg-center" style="background-image: linear-gradient(rgba(15, 44, 89, 0.85), rgba(15, 44, 89, 0.85)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1600&q=80');">
+                <div class="max-w-5xl mx-auto text-center">
+                    <h1 class="text-3xl sm:text-5xl font-bold mb-4">Encontre o imóvel ideal para você em Goioerê e região</h1>
+                    <p class="text-slate-300 text-lg mb-8">Compre ou alugue casas, apartamentos, terrenos e salas comerciais com segurança e facilidade.</p>
+                    
+                    <!-- BOX DE BUSCA -->
+                    <div class="bg-white rounded-xl p-4 sm:p-6 text-slate-800 shadow-2xl max-w-4xl mx-auto">
+                        <div class="flex border-b mb-4">
+                            <button onclick="setSearchType('venda')" id="tab-venda" class="py-2 px-6 font-semibold border-b-2 border-brand-blue text-brand-blue">Comprar</button>
+                            <button onclick="setSearchType('locacao')" id="tab-locacao" class="py-2 px-6 font-semibold text-slate-500 border-b-2 border-transparent hover:text-brand-blue">Alugar</button>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 mb-1 text-left">Tipo de Imóvel</label>
+                                <select id="search-tipo" class="w-full border rounded-lg p-2.5 text-sm bg-slate-50">
+                                    <option value="">Todos os Tipos</option>
+                                    <option value="Casa">Casa</option>
+                                    <option value="Apartamento">Apartamento</option>
+                                    <option value="Sobrado">Sobrado</option>
+                                    <option value="Terreno">Terreno</option>
+                                    <option value="Comercial">Comercial</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 mb-1 text-left">Bairro / Cidade</label>
+                                <input type="text" id="search-bairro" placeholder="Ex: Jardim Lindóia" class="w-full border rounded-lg p-2.5 text-sm bg-slate-50">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 mb-1 text-left">Preço Máximo</label>
+                                <select id="search-preco" class="w-full border rounded-lg p-2.5 text-sm bg-slate-50">
+                                    <option value="">Qualquer Valor</option>
+                                    <option value="200000">Até R$ 200.000</option>
+                                    <option value="500000">Até R$ 500.000</option>
+                                    <option value="1000000">Até R$ 1.000.000</option>
+                                </select>
+                            </div>
+                            <div class="flex items-end">
+                                <button onclick="executeSearch()" class="w-full bg-brand-accent hover:bg-orange-600 text-white font-bold p-2.5 rounded-lg transition flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <span>Buscar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DESTAQUES À VENDA -->
+            <div class="max-w-7xl mx-auto px-4 py-16">
+                <div class="flex justify-between items-end mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-brand-navy">Destaques de Casas à Venda</h2>
+                        <p class="text-slate-500 text-sm">Confira as melhores oportunidades selecionadas para você</p>
+                    </div>
+                    <a href="#" onclick="showSection('imoveis', 'comprar')" class="text-brand-blue font-semibold hover:underline text-sm">Ver todas <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                </div>
+                <div id="grid-destaques-venda" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Cards via JS -->
+                </div>
+            </div>
+
+            <!-- CTA CAPTAÇÃO DE IMÓVEIS -->
+            <div class="bg-slate-100 py-12 border-y">
+                <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-blue-100 text-brand-blue text-xs font-bold px-3 py-1 rounded-full uppercase">Proprietários</span>
+                            <h3 class="text-2xl font-bold text-brand-navy mt-3 mb-2">Quer vender seu imóvel?</h3>
+                            <p class="text-slate-600 mb-6 text-sm">Anuncie conosco e tenha ampla divulgação em Goioerê e região com acompanhamento profissional completo.</p>
+                        </div>
+                        <button onclick="showSection('vender')" class="bg-brand-navy text-white font-semibold py-2.5 px-6 rounded-lg w-max hover:bg-slate-800 transition">Anunciar para Venda</button>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Locação</span>
+                            <h3 class="text-2xl font-bold text-brand-navy mt-3 mb-2">Quer alugar seu imóvel?</h3>
+                            <p class="text-slate-600 mb-6 text-sm">Garantimos análise criteriosa de locatários e administração completa para sua total tranquilidade.</p>
+                        </div>
+                        <button onclick="showSection('vender')" class="bg-brand-blue text-white font-semibold py-2.5 px-6 rounded-lg w-max hover:bg-blue-700 transition">Anunciar para Locação</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DESTAQUES PARA LOCAÇÃO -->
+            <div class="max-w-7xl mx-auto px-4 py-16">
+                <div class="flex justify-between items-end mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-brand-navy">Destaques de Apartamentos para Locação</h2>
+                        <p class="text-slate-500 text-sm">Imóveis prontos para morar</p>
+                    </div>
+                    <a href="#" onclick="showSection('imoveis', 'alugar')" class="text-brand-blue font-semibold hover:underline text-sm">Ver todos <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                </div>
+                <div id="grid-destaques-locacao" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Cards via JS -->
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="bg-white py-16 border-t">
+                <div class="max-w-4xl mx-auto px-4">
+                    <h2 class="text-2xl font-bold text-brand-navy text-center mb-8">Dúvidas Frequentes (FAQ)</h2>
+                    <div class="space-y-4">
+                        <details class="bg-slate-50 p-4 rounded-lg border">
+                            <summary class="font-semibold text-brand-navy cursor-pointer">Quais documentos são necessários para alugar um imóvel?</summary>
+                            <p class="mt-2 text-sm text-slate-600">Geralmente é necessário apresentar RG, CPF, comprovante de residência e comprovante de renda dos últimos 3 meses (compatível com 3x o valor do aluguel).</p>
+                        </details>
+                        <details class="bg-slate-50 p-4 rounded-lg border">
+                            <summary class="font-semibold text-brand-navy cursor-pointer">A Imobiliária Habitar faz avaliação de imóveis?</summary>
+                            <p class="mt-2 text-sm text-slate-600">Sim! Realizamos avaliações mercadológicas precisas para venda e locação em Goioerê e região.</p>
+                        </details>
+                        <details class="bg-slate-50 p-4 rounded-lg border">
+                            <summary class="font-semibold text-brand-navy cursor-pointer">Como funciona o processo de financiamento?</summary>
+                            <p class="mt-2 text-sm text-slate-600">Nossa equipe auxilia em todo o processo de simulação, aprovação de crédito e documentação junto aos principais bancos.</p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO LISTAGEM DE IMÓVEIS (VITRINE COM FILTROS) -->
+        <section id="sec-imoveis" class="hidden max-w-7xl mx-auto px-4 py-8">
+            <h1 class="text-3xl font-bold text-brand-navy mb-6">Catálogo de Imóveis</h1>
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- PAINEL FILTROS -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm h-fit">
+                    <h2 class="font-bold text-lg text-brand-navy mb-4 border-b pb-2 flex justify-between items-center">
+                        <span>Filtros</span>
+                        <button onclick="resetFilters()" class="text-xs text-brand-blue hover:underline font-normal">Limpar</button>
+                    </h2>
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <label class="block font-medium text-slate-700 mb-1">Finalidade</label>
+                            <select id="filter-finalidade" onchange="applyFilters()" class="w-full border rounded-lg p-2">
+                                <option value="">Todas</option>
+                                <option value="Venda">Venda</option>
+                                <option value="Locação">Locação</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-medium text-slate-700 mb-1">Tipo de Imóvel</label>
+                            <select id="filter-tipo" onchange="applyFilters()" class="w-full border rounded-lg p-2">
+                                <option value="">Todos</option>
+                                <option value="Casa">Casa</option>
+                                <option value="Apartamento">Apartamento</option>
+                                <option value="Sobrado">Sobrado</option>
+                                <option value="Terreno">Terreno</option>
+                                <option value="Comercial">Comercial</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-medium text-slate-700 mb-1">Código do Imóvel</label>
+                            <input type="text" id="filter-codigo" onkeyup="applyFilters()" placeholder="Ex: CA20029" class="w-full border rounded-lg p-2">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block font-medium text-slate-700 mb-1">Quartos</label>
+                                <select id="filter-quartos" onchange="applyFilters()" class="w-full border rounded-lg p-2">
+                                    <option value="">Qualquer</option>
+                                    <option value="1">1+</option>
+                                    <option value="2">2+</option>
+                                    <option value="3">3+</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block font-medium text-slate-700 mb-1">Garagens</label>
+                                <select id="filter-garagem" onchange="applyFilters()" class="w-full border rounded-lg p-2">
+                                    <option value="">Qualquer</option>
+                                    <option value="1">1+</option>
+                                    <option value="2">2+</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRID IMOVEIS -->
+                <div class="lg:col-span-3">
+                    <div id="grid-imoveis-list" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        <!-- Renderizado via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DETALHES DO IMÓVEL -->
+        <section id="sec-detalhe" class="hidden max-w-7xl mx-auto px-4 py-8">
+            <button onclick="showSection('imoveis')" class="text-brand-blue font-medium mb-4 inline-flex items-center"><i class="fa-solid fa-arrow-left mr-2"></i> Voltar para a busca</button>
+            <div id="detalhe-container">
+                <!-- Renderizado dinamicamente via JS -->
+            </div>
+        </section>
+
+        <!-- SEÇÃO VENDA/ALUGUE SEU IMÓVEL (CAPTAÇÃO) -->
+        <section id="sec-vender" class="hidden max-w-4xl mx-auto px-4 py-12">
+            <div class="bg-white p-8 rounded-xl shadow-md border border-slate-200">
+                <h1 class="text-2xl font-bold text-brand-navy mb-2">Quer vender ou alugar seu imóvel?</h1>
+                <p class="text-slate-600 mb-6 text-sm">Preencha os dados abaixo e nossa equipe entrará em contato para agendar uma avaliação.</p>
+                <form onsubmit="handleFormSubmit(event, 'Captação de Imóvel')" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Nome Completo</label>
+                            <input type="text" required class="w-full border rounded-lg p-2.5 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">WhatsApp / Telefone</label>
+                            <input type="tel" required class="w-full border rounded-lg p-2.5 text-sm">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Finalidade</label>
+                            <select class="w-full border rounded-lg p-2.5 text-sm">
+                                <option>Venda</option>
+                                <option>Locação</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Tipo do Imóvel</label>
+                            <select class="w-full border rounded-lg p-2.5 text-sm">
+                                <option>Casa</option>
+                                <option>Apartamento</option>
+                                <option>Sobrado</option>
+                                <option>Terreno</option>
+                                <option>Comercial</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Bairro em Goioerê</label>
+                            <input type="text" required class="w-full border rounded-lg p-2.5 text-sm">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">Observações / Detalhes do Imóvel</label>
+                        <textarea rows="4" class="w-full border rounded-lg p-2.5 text-sm" placeholder="Informe o valor pretendido, número de quartos, área, etc."></textarea>
+                    </div>
+                    <button type="submit" class="bg-brand-blue text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition">Solicitar Avaliação</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- SEÇÃO SOBRE A HABITAR -->
+        <section id="sec-sobre" class="hidden max-w-5xl mx-auto px-4 py-12">
+            <h1 class="text-3xl font-bold text-brand-navy mb-6 text-center">Sobre a Imobiliária Habitar</h1>
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                <p class="text-slate-700 leading-relaxed">
+                    A <strong>Imobiliária Habitar</strong> atua no mercado imobiliário de Goioerê e região com foco na excelência de atendimento, transparência e segurança jurídica em todas as negociações de compra, venda e locação.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t">
+                    <div class="text-center p-4">
+                        <i class="fa-solid fa-bullseye text-3xl text-brand-blue mb-2"></i>
+                        <h3 class="font-bold text-brand-navy mb-1">Missão</h3>
+                        <p class="text-xs text-slate-600">Conectar pessoas aos seus imóveis ideais com ética e agilidade.</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <i class="fa-solid fa-eye text-3xl text-brand-blue mb-2"></i>
+                        <h3 class="font-bold text-brand-navy mb-1">Visão</h3>
+                        <p class="text-xs text-slate-600">Ser referência em inovação e credibilidade imobiliária na região.</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <i class="fa-solid fa-shield-halved text-3xl text-brand-blue mb-2"></i>
+                        <h3 class="font-bold text-brand-navy mb-1">Valores</h3>
+                        <p class="text-xs text-slate-600">Transparência, respeito, comprometimento e segurança jurídica.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO BLOG -->
+        <section id="sec-blog" class="hidden max-w-6xl mx-auto px-4 py-12">
+            <h1 class="text-3xl font-bold text-brand-navy mb-8">Blog & Conteúdos Imobiliários</h1>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <article class="bg-white rounded-xl shadow-sm border overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover" alt="Post">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-brand-blue">Dicas de Compra</span>
+                        <h2 class="font-bold text-lg text-brand-navy mt-2 mb-2">Documentos necessários para comprar uma casa</h2>
+                        <p class="text-xs text-slate-600 mb-4">Confira o checklist completo de certidões e comprovantes exigidos no financiamento.</p>
+                        <a href="#" class="text-xs font-bold text-brand-blue hover:underline">Ler artigo completo →</a>
+                    </div>
+                </article>
+                <article class="bg-white rounded-xl shadow-sm border overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover" alt="Post">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-brand-blue">Mercado</span>
+                        <h2 class="font-bold text-lg text-brand-navy mt-2 mb-2">Como valorizar seu imóvel para venda em Goioerê</h2>
+                        <p class="text-xs text-slate-600 mb-4">Pequenos reparos e pinturas estratégicas que aumentam a atratividade do anúncio.</p>
+                        <a href="#" class="text-xs font-bold text-brand-blue hover:underline">Ler artigo completo →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SEÇÃO CONTATO -->
+        <section id="sec-contato" class="hidden max-w-6xl mx-auto px-4 py-12">
+            <h1 class="text-3xl font-bold text-brand-navy mb-8">Fale Conosco</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl border shadow-sm">
+                    <h2 class="font-bold text-lg text-brand-navy mb-4">Envie uma mensagem</h2>
+                    <form onsubmit="handleFormSubmit(event, 'Contato Geral')" class="space-y-4">
+                        <input type="text" placeholder="Nome" required class="w-full border rounded-lg p-2.5 text-sm">
+                        <input type="email" placeholder="E-mail" required class="w-full border rounded-lg p-2.5 text-sm">
+                        <input type="tel" placeholder="Telefone / WhatsApp" required class="w-full border rounded-lg p-2.5 text-sm">
+                        <textarea rows="4" placeholder="Mensagem" required class="w-full border rounded-lg p-2.5 text-sm"></textarea>
+                        <button type="submit" class="bg-brand-navy text-white font-bold py-2.5 px-6 rounded-lg hover:bg-slate-800 transition">Enviar Mensagem</button>
+                    </form>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl border shadow-sm">
+                        <h2 class="font-bold text-lg text-brand-navy mb-4">Informações de Contato</h2>
+                        <ul class="space-y-3 text-sm text-slate-700">
+                            <li><i class="fa-solid fa-location-dot w-6 text-brand-accent"></i> Av. Moisés Lupion, 96 – Jardim Lindóia, Goioerê – PR</li>
+                            <li><i class="fa-solid fa-phone w-6 text-brand-accent"></i> (44) 99157-9229</li>
+                            <li><i class="fa-solid fa-envelope w-6 text-brand-accent"></i> contato@imobiliariahabitar.com.br</li>
+                            <li><i class="fa-solid fa-clock w-6 text-brand-accent"></i> Segunda a Sexta: 08:00 às 18:00</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO FAVORITOS -->
+        <section id="sec-favoritos" class="hidden max-w-7xl mx-auto px-4 py-8">
+            <h1 class="text-3xl font-bold text-brand-navy mb-6">Seus Imóveis Favoritos</h1>
+            <div id="grid-favoritos" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Preenchido via JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/5544991579229?text=Olá,%20estou%20no%20site%20da%20Habitar%20e%20gostaria%20de%20atendimento" target="_blank" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl z-50 transition transform hover:scale-110">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- FOOTER COMPLETE -->
+    <footer class="bg-brand-navy text-slate-300 pt-12 pb-6 border-t border-slate-800 mt-12">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-700 text-sm">
+            <div>
+                <span class="font-bold text-white text-xl tracking-wider block mb-2">HABITAR</span>
+                <p class="text-xs text-slate-400 mb-4">Imobiliária Habitar em Goioerê e Região.<br>CRECI J-6100</p>
+                <p class="text-xs text-slate-400">Av. Moisés Lupion, 96 – Jardim Lindóia<br>Goioerê – PR, 87360-000</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-3">Navegação</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#" onclick="showSection('imoveis', 'comprar')" class="hover:underline">Comprar Imóvel</a></li>
+                    <li><a href="#" onclick="showSection('imoveis', 'alugar')" class="hover:underline">Alugar Imóvel</a></li>
+                    <li><a href="#" onclick="showSection('vender')" class="hover:underline">Anunciar Imóvel</a></li>
+                    <li><a href="#" onclick="showSection('sobre')" class="hover:underline">Sobre a Habitar</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-3">Contato</h4>
+                <p class="text-xs mb-2">WhatsApp / Tel: (44) 99157-9229</p>
+                <p class="text-xs mb-4">Atendimento: Seg - Sex: 8h às 18h</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-3">Redes Sociais</h4>
+                <div class="flex space-x-3 text-lg">
+                    <a href="#" class="w-8 h-8 rounded bg-slate-800 flex items-center justify-center hover:bg-brand-blue"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-8 h-8 rounded bg-slate-800 flex items-center justify-center hover:bg-brand-blue"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 pt-4 flex flex-col md:flex-row justify-between text-xs text-slate-500">
+            <span>&copy; 2026 Imobiliária Habitar. Todos os direitos reservados.</span>
+            <span>Segurança & Privacidade | LGPD Compliant</span>
+        </div>
+    </footer>
+
+    <!-- MODAL PAINEL ADMIN / CRM SIMULADO -->
+    <div id="modal-admin" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
+            <div class="bg-brand-navy text-white p-4 flex justify-between items-center">
+                <h3 class="font-bold text-lg"><i class="fa-solid fa-gauge mr-2"></i> Painel Administrativo Habitar</h3>
+                <button onclick="toggleAdminModal()" class="text-slate-300 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div class="p-6 overflow-y-auto custom-scrollbar flex-grow space-y-6">
+                <!-- METRICAS -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-slate-100 p-4 rounded-lg text-center">
+                        <span class="block text-2xl font-bold text-brand-navy" id="dash-total">0</span>
+                        <span class="text-xs text-slate-500">Total Imóveis</span>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg text-center">
+                        <span class="block text-2xl font-bold text-green-700" id="dash-venda">0</span>
+                        <span class="text-xs text-slate-500">Para Venda</span>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg text-center">
+                        <span class="block text-2xl font-bold text-brand-blue" id="dash-locacao">0</span>
+                        <span class="text-xs text-slate-500">Para Locação</span>
+                    </div>
+                    <div class="bg-orange-50 p-4 rounded-lg text-center">
+                        <span class="block text-2xl font-bold text-brand-accent" id="dash-leads">5</span>
+                        <span class="text-xs text-slate-500">Novos Leads</span>
+                    </div>
+                </div>
+
+                <!-- BOTÃO DE RESET DOS DADOS INICIAIS -->
+                <div class="flex justify-between items-center bg-amber-50 p-3 rounded-lg border border-amber-200">
+                    <span class="text-xs text-amber-800 font-medium">Deseja restaurar a lista com os 15 imóveis à venda e 10 para locação?</span>
+                    <button onclick="resetDataToInitial()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-3 py-1.5 rounded transition">Restaurar Cadastro Padrão</button>
+                </div>
+
+                <!-- FORMULARIO NOVO IMOVEL -->
+                <div class="bg-slate-50 p-4 rounded-lg border">
+                    <h4 class="font-bold text-brand-navy mb-3 text-sm">Cadastrar Novo Imóvel</h4>
+                    <form onsubmit="cadastrarImovelAdmin(event)" class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                        <input type="text" id="adm-codigo" placeholder="Código (Ex: CA20030)" required class="p-2 border rounded">
+                        <select id="adm-finalidade" class="p-2 border rounded"><option>Venda</option><option>Locação</option></select>
+                        <select id="adm-tipo" class="p-2 border rounded"><option>Casa</option><option>Apartamento</option><option>Sobrado</option><option>Terreno</option><option>Comercial</option></select>
+                        <input type="text" id="adm-titulo" placeholder="Título do Anúncio" required class="p-2 border rounded md:col-span-2">
+                        <input type="number" id="adm-valor" placeholder="Valor (R$)" required class="p-2 border rounded">
+                        <input type="text" id="adm-bairro" placeholder="Bairro" required class="p-2 border rounded">
+                        <input type="number" id="adm-area" placeholder="Área (m²)" class="p-2 border rounded">
+                        <input type="number" id="adm-quartos" placeholder="Nº Quartos" class="p-2 border rounded">
+                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold p-2 rounded md:col-span-3 transition">+ Adicionar Imóvel</button>
+                    </form>
+                </div>
+
+                <!-- GERENCIAMENTO IMOVEIS -->
+                <div>
+                    <h4 class="font-bold text-brand-navy mb-2 text-sm">Imóveis Cadastrados</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="bg-slate-200 text-slate-700">
+                                    <th class="p-2">Cód</th>
+                                    <th class="p-2">Título</th>
+                                    <th class="p-2">Tipo</th>
+                                    <th class="p-2">Valor</th>
+                                    <th class="p-2">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adm-table-body">
+                                <!-- Preenchido por JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LÓGICA DO SITE -->
+    <script>
+        // BANCO DE DADOS SIMULADO COM 15 CASAS À VENDA E 10 APARTAMENTOS PARA LOCAÇÃO
+        const initialProperties = [
+            // 15 CASAS À VENDA
+            {
+                id: 1, codigo: "CA20230", finalidade: "Venda", tipo: "Casa",
+                titulo: "Casa à venda - 149.47m² - Jardim Curitiba, Goioerê-PR", bairro: "Rua Brasil - nº 88 - Jardim Curitiba - Goioerê - PR", cidade: "Goioerê",
+                valor: 450000, areaConstruida: 149.47, areaTerreno:  180, quartos: 2, banheiros: 1, garagem: 1,
+                imagem: "Screenshot 2026-09-23 11.28.04.png",
+                caracteristicas: ["Sala de Estar", "Cozinha", "Edícula com Churrasqueira", "Quintal Amplo"]
+            },
+            {
+                id: 2, codigo: "CA2002", finalidade: "Venda", tipo: "Casa",
+                titulo: "Casa à venda - 78m² - Jardim Curitiba, Goioerê-PR", bairro: "Rua Rosalvo de Melo Leitão - nº 825 - Jardim Curitiba - Goioerê - PR", cidade: "Goioerê",
+                valor: 330000, areaConstruida: 78, areaTerreno: 390, quartos: 3, banheiros: "banheiro social", garagem: 4,
+                imagem: "Screenshot 2026-09-23 11.43.11.png",
+                caracteristicas: ["sala, cozinha, sala de jantar, 03 quartos, banheiro social despensa, garagem coberta para até 4 veículos "]
+            },
+            {
+                id: 3, codigo: "CA2003", finalidade: "Venda", tipo: "Casa",
+                titulo: "Casa à venda - 70m² - Santa Casa", bairro: "Avenida Paraná - nº 310 - Santa Casa - Goioerê - PR", cidade: "Goioerê",
+                valor: 219000, areaConstruida: 70, areaTerreno: 307.62, quartos: 2, banheiros: 1, garagem: "coberta",
+                imagem: "Screenshot 2026-09-23 11.53.59.png",
+                caracteristicas: ["RESIDENCIA EM ALVENARIA/FORRO DE MADEIRA CONTENDO: sala cozinha 02 quartos banheiro social lavandeira coberta garagem coberta  "]
+            },
+            {
+                id: 4, codigo: "CA20220", finalidade: "Venda", tipo: "Casa",
+                titulo: "Casa à venda - 120m² - Centro, Goioerê-PR", bairro: "Rua Campo Mourão - nº 964 - Centro - Goioerê - PR", cidade: "Goioerê",
+                valor: 280000, areaConstruida: 120, areaTerreno: 350, quartos: 2, banheiros: "1 suíte", garagem: "garagem coberta ",
+                imagem: "Screenshot 2026-09-23 12.01.36.png",
+                caracteristicas: ["CASA EM ALVENARIA/ LAJE E FORRO CONTENDO: sala cozinha 1 suíte 2 quartos banheiro social lavandeira coberta garagem coberta"]
+            },
+            {
+                id: 5, codigo: "CA2005", finalidade: "Venda", tipo: "Casa",
+                titulo: "Casa Reformada – Jardim Curitiba", bairro: "Jardim Curitiba", cidade: "Goioerê",
+                valor: 240000, areaConstruida: 105, areaTerreno: 200, quartos: 2, banheiros: 1, garagem: 1,
+                imagem: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Cozinha Integrada", "Lavanderia Coberta", "Excelente Ventilação"]
+            },
+            {
+                id: 6, codigo: "CA2006", finalidade: "Venda", tipo: "Casa",
+                titulo: "Residência Espaçosa com Quintal – Jardim Universitário", bairro: "Jardim Universitário", cidade: "Goioerê",
+                valor: 410000, areaConstruida: 175, areaTerreno: 360, quartos: 3, banheiros: 2, garagem: 2,
+                imagem: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Área de Lazer", "Churrasqueira", "Árvores Frutíferas"]
+            },
+            {
+                id: 7, codigo: "CA2007", finalidade: "Venda", tipo: "Casa",
+                titulo: "Casa Nova Pronta para Morar – Jardim Santa Clara", bairro: "Jardim Santa Clara", cidade: "Goioerê",
+                valor: 295000, areaConstruida: 115, areaTerreno: 210, quartos: 2, banheiros: 2, garagem: 1,
+                imagem: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Suíte", "Acabamento em Gesso", "Garagem Coberta"]
+            },
+            {
+                id: 8, codigo: "CA2008", finalidade: "Venda", tipo: "Casa",
+                titulo: "Casa Ampla com Suíte – Jardim América", bairro: "Jardim América", cidade: "Goioerê",
+                valor: 480000, areaConstruida: 190, areaTerreno: 380, quartos: 3, banheiros: 3, garagem: 2,
+                imagem: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Suíte com Closet", "Escritório", "Cozinha Gourmet"]
+            },
+            {
+                id: 9, codigo: "CA2009", finalidade: "Venda", tipo: "Casa",
+                titulo: "Casa Aconchegante e Bem Localizada – Vila Guaira", bairro: "Vila Guaira", cidade: "Goioerê",
+                valor: 220000, areaConstruida: 95, areaTerreno: 180, quartos: 2, banheiros: 1, garagem: 1,
+                imagem: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Muro Alto", "Grade de Segurança", "Próximo a Escolas"]
+            },
+            {
+                id: 10, codigo: "CA2010", finalidade: "Venda", tipo: "Casa",
+                titulo: "Casa Contemporânea com Pé Direito Duplo – Jardim Lindóia", bairro: "Jardim Lindóia", cidade: "Goioerê",
+                valor: 890000, areaConstruida: 280, areaTerreno: 450, quartos: 4, banheiros: 4, garagem: 3,
+                imagem: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["2 Suítes", "Energia Solar", "Piscina", "Automação Residencial"]
+            },
+            {
+                id: 11, codigo: "CA2011", finalidade: "Venda", tipo: "Casa",
+                titulo: "Casa Familiar com Edícula – Jardim Colina Verde", bairro: "Jardim Colina Verde", cidade: "Goioerê",
+                valor: 340000, areaConstruida: 140, areaTerreno: 280, quartos: 3, banheiros: 2, garagem: 2,
+                imagem: "https://images.unsplash.com/photo-1576941089067-2de3c901e126?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Edícula Completa", "Lavanderia", "Rua Tranquila"]
+            },
+            {
+                id: 12, codigo: "CA2012", finalidade: "Venda", tipo: "Casa",
+                titulo: "Casa Charmosa com Jardim – Jardim Europa", bairro: "Jardim Europa", cidade: "Goioerê",
+                valor: 360000, areaConstruida: 145, areaTerreno: 310, quartos: 3, banheiros: 2, garagem: 2,
+                imagem: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Jardim Frontal", "Varanda Gourtmet", "Armários Embutidos"]
+            },
+            {
+                id: 13, codigo: "CA2013", finalidade: "Venda", tipo: "Casa",
+                titulo: "Oportunidade de Casa Térrea – Vila Candeias", bairro: "Vila Candeias", cidade: "Goioerê",
+                valor: 260000, areaConstruida: 110, areaTerreno: 220, quartos: 2, banheiros: 1, garagem: 1,
+                imagem: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Ótimo Custo-Benefício", "Quintal Cimentado", "Portão Automático"]
+            },
+            {
+                id: 14, codigo: "CA2014", finalidade: "Venda", tipo: "Casa",
+                titulo: "Residência com Espaço Comercial – Centro", bairro: "Centro", cidade: "Goioerê",
+                valor: 550000, areaConstruida: 210, areaTerreno: 350, quartos: 3, banheiros: 3, garagem: 2,
+                imagem: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Sala Comercial na Frente", "Casa Ampla nos Fundos", "Localização Estratégica"]
+            },
+            {
+                id: 15, codigo: "CA2015", finalidade: "Venda", tipo: "Casa",
+                titulo: "Casa de Esquina com Amplo Terreno – Jardim Universitário", bairro: "Jardim Universitário", cidade: "Goioerê",
+                valor: 430000, areaConstruida: 165, areaTerreno: 420, quartos: 3, banheiros: 2, garagem: 2,
+                imagem: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Terreno Espaçoso", "Suíte", "Área de Festas"]
+            },
+
+            // 10 APARTAMENTOS PARA LOCAÇÃO
+            {
+                id: 16, codigo: "AL3001", finalidade: "Locação", tipo: "Apartamento",
+                titulo: "Apartamento Central de 2 Quartos – Centro", bairro: "Centro", cidade: "Goioerê",
+                valor: 1200, areaConstruida: 65, areaTerreno: 65, quartos: 2, banheiros: 1, garagem: 1,
+                imagem: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Cozinha Móveis Simples", "Sacada", "Garagem Coberta"]
+            },
+            {
+                id: 17, codigo: "AL3002", finalidade: "Locação", tipo: "Apartamento",
+                titulo: "Apartamento com Suíte e Sacada – Jardim Lindóia", bairro: "Jardim Lindóia", cidade: "Goioerê",
+                valor: 1600, areaConstruida: 82, areaTerreno: 82, quartos: 3, banheiros: 2, garagem: 1,
+                imagem: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Suíte", "Churrasqueira na Sacada", "Elevador"]
+            },
+            {
+                id: 18, codigo: "AL3003", finalidade: "Locação", tipo: "Apartamento",
+                titulo: "Studio Moderno Próximo à Faculdade – Jardim Universitário", bairro: "Jardim Universitário", cidade: "Goioerê",
+                valor: 900, areaConstruida: 40, areaTerreno: 40, quartos: 1, banheiros: 1, garagem: 1,
+                imagem: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Semi-Mobiliado", "Ideal para Estudante", "Incluso Condomínio"]
+            },
+            {
+                id: 19, codigo: "AL3004", finalidade: "Locação", tipo: "Apartamento",
+                titulo: "Apartamento Amplo de 3 Quartos – Centro", bairro: "Centro", cidade: "Goioerê",
+                valor: 1800, areaConstruida: 100, areaTerreno: 100, quartos: 3, banheiros: 2, garagem: 2,
+                imagem: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Salas Integradas", "Área de Serviço Integrada", "Portaria"]
+            },
+            {
+                id: 20, codigo: "AL3005", finalidade: "Locação", tipo: "Apartamento",
+                titulo: "Apartamento Mobiliado – Vila Candeias", bairro: "Vila Candeias", cidade: "Goioerê",
+                valor: 1500, areaConstruida: 70, areaTerreno: 70, quartos: 2, banheiros: 1, garagem: 1,
+                imagem: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Totalmente Mobiliado", "Ar Condicionado", "Micro-ondas e Geladeira"]
+            },
+            {
+                id: 21, codigo: "AL3006", finalidade: "Locação", tipo: "Apartamento",
+                titulo: "Apartamento Aconchegante – Jardim Curitiba", bairro: "Jardim Curitiba", cidade: "Goioerê",
+                valor: 1100, areaConstruida: 60, areaTerreno: 60, quartos: 2, banheiros: 1, garagem: 1,
+                imagem: "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Ambiente Tranquilo", "Baixo Condomínio", "Interfone"]
+            },
+            {
+                id: 22, codigo: "AL3007", finalidade: "Locação", tipo: "Apartamento",
+                titulo: "Apartamento Executivo – Jardim Lindóia", bairro: "Jardim Lindóia", cidade: "Goioerê",
+                valor: 2100, areaConstruida: 110, areaTerreno: 110, quartos: 3, banheiros: 3, garagem: 2,
+                imagem: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["1 Suíte com Closet", "Varanda Gourmet", "Piso LAMINADO"]
+            },
+            {
+                id: 23, codigo: "AL3008", finalidade: "Locação", tipo: "Apartamento",
+                titulo: "Kitnet Funcional – Jardim Universitário", bairro: "Jardim Universitário", cidade: "Goioerê",
+                valor: 850, areaConstruida: 35, areaTerreno: 35, quartos: 1, banheiros: 1, garagem: 1,
+                imagem: "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Cozinha e Quarto Integrados", "Lavanderia Comunitária", "Internet Inclusa"]
+            },
+            {
+                id: 24, codigo: "AL3009", finalidade: "Locação", tipo: "Apartamento",
+                titulo: "Apartamento Novo Primeira Locação – Jardim Europa", bairro: "Jardim Europa", cidade: "Goioerê",
+                valor: 1400, areaConstruida: 75, areaTerreno: 75, quartos: 2, banheiros: 2, garagem: 1,
+                imagem: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Primeira Locação", "Acabamento Premium", "Suíte"]
+            },
+            {
+                id: 25, codigo: "AL3010", finalidade: "Locação", tipo: "Apartamento",
+                titulo: "Apartamento Residencial Familiar – Vila Guaira", bairro: "Vila Guaira", cidade: "Goioerê",
+                valor: 1300, areaConstruida: 78, areaTerreno: 78, quartos: 2, banheiros: 1, garagem: 1,
+                imagem: "https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Playground Infantil", "Salão de Festas", "Segurança 24h"]
+            }
+        ];
+
+        let properties = JSON.parse(localStorage.getItem('habitar_properties')) || initialProperties;
+        let favorites = JSON.parse(localStorage.getItem('habitar_favorites')) || [];
+        let activeSearchType = 'venda';
+
+        // CARREGAMENTO INICIAL
+        window.onload = function() {
+            renderFeatured();
+            renderPropertyList(properties);
+            updateFavCount();
+            updateDashMetrics();
+        };
+
+        function saveProperties() {
+            localStorage.setItem('habitar_properties', JSON.stringify(properties));
+            renderFeatured();
+            renderPropertyList(properties);
+            updateDashMetrics();
+        }
+
+        function resetDataToInitial() {
+            if(confirm("Isso irá restaurar a lista com os 15 imóveis à venda e 10 para locação padrão. Continuar?")) {
+                properties = [...initialProperties];
+                saveProperties();
+                alert("Dados restaurados com sucesso!");
+            }
+        }
+
+        // CONTROLADOR DE ROTAS / NAVEGAÇÃO
+        function showSection(sectionId, filterParam = null) {
+            const sections = ['home', 'imoveis', 'detalhe', 'vender', 'sobre', 'blog', 'contato', 'favoritos'];
+            sections.forEach(s => document.getElementById(`sec-${s}`).classList.add('hidden'));
+            
+            document.getElementById(`sec-${sectionId}`).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (sectionId === 'imoveis' && filterParam) {
+                document.getElementById('filter-finalidade').value = filterParam === 'comprar' ? 'Venda' : 'Locação';
+                applyFilters();
+            }
+            if (sectionId === 'favoritos') {
+                renderFavorites();
+            }
+        }
+
+        // RENDERIZAR CARD DO IMÓVEL
+        function createPropertyCard(p) {
+            const isFav = favorites.includes(p.id);
+            return `
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition flex flex-col justify-between">
+                    <div class="relative">
+                        <img src="${p.imagem}" alt="${p.titulo}" class="w-full h-48 object-cover">
+                        <span class="absolute top-3 left-3 bg-${p.finalidade === 'Venda' ? 'brand-navy' : 'brand-accent'} text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">
+                            ${p.finalidade}
+                        </span>
+                        <button onclick="toggleFavorite(${p.id})" class="absolute top-3 right-3 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center text-slate-600 hover:text-red-500 transition">
+                            <i class="fa-${isFav ? 'solid text-red-500' : 'regular'} fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-[11px] text-slate-400 font-semibold uppercase">${p.tipo} • Cód: ${p.codigo}</span>
+                            <h3 class="font-bold text-brand-navy text-base mt-1 mb-1 line-clamp-1">${p.titulo}</h3>
+                            <p class="text-xs text-slate-500 mb-3"><i class="fa-solid fa-location-dot mr-1"></i> ${p.bairro}, ${p.cidade}</p>
+                            <div class="text-xl font-extrabold text-brand-blue mb-4">
+                                R$ ${p.valor.toLocaleString('pt-BR')}${p.finalidade === 'Locação' ? '/mês' : ''}
+                            </div>
+                        </div>
+                        <div>
+                            <div class="grid grid-cols-3 gap-2 border-t pt-3 text-center text-slate-600 text-xs mb-4">
+                                <div><i class="fa-solid fa-ruler-combined block text-brand-blue mb-1"></i> ${p.areaConstruida} m²</div>
+                                <div><i class="fa-solid fa-bed block text-brand-blue mb-1"></i> ${p.quartos} qtos</div>
+                                <div><i class="fa-solid fa-car block text-brand-blue mb-1"></i> ${p.garagem} vag</div>
+                            </div>
+                            <button onclick="viewPropertyDetails(${p.id})" class="w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-bold py-2 rounded-lg text-xs transition">
+                                Ver imóvel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // DESTAQUES DA HOME
+        function renderFeatured() {
+            const vendas = properties.filter(p => p.finalidade === 'Venda').slice(0, 3);
+            const locacoes = properties.filter(p => p.finalidade === 'Locação').slice(0, 3);
+
+            document.getElementById('grid-destaques-venda').innerHTML = vendas.map(createPropertyCard).join('') || '<p class="text-xs text-slate-400">Nenhum imóvel em destaque.</p>';
+            document.getElementById('grid-destaques-locacao').innerHTML = locacoes.map(createPropertyCard).join('') || '<p class="text-xs text-slate-400">Nenhum imóvel em destaque.</p>';
+        }
+
+        // LISTAGEM E FILTROS
+        function renderPropertyList(list) {
+            const grid = document.getElementById('grid-imoveis-list');
+            if (list.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500">Nenhum imóvel encontrado com os filtros selecionados.</div>`;
+                return;
+            }
+            grid.innerHTML = list.map(createPropertyCard).join('');
+        }
+
+        function applyFilters() {
+            const fin = document.getElementById('filter-finalidade').value;
+            const tipo = document.getElementById('filter-tipo').value;
+            const cod = document.getElementById('filter-codigo').value.toLowerCase();
+            const qtos = document.getElementById('filter-quartos').value;
+
+            const filtered = properties.filter(p => {
+                return (!fin || p.finalidade === fin) &&
+                       (!tipo || p.tipo === tipo) &&
+                       (!cod || p.codigo.toLowerCase().includes(cod)) &&
+                       (!qtos || p.quartos >= parseInt(qtos));
+            });
+
+            renderPropertyList(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('filter-finalidade').value = '';
+            document.getElementById('filter-tipo').value = '';
+            document.getElementById('filter-codigo').value = '';
+            document.getElementById('filter-quartos').value = '';
+            renderPropertyList(properties);
+        }
+
+        function setSearchType(type) {
+            activeSearchType = type;
+            document.getElementById('tab-venda').className = type === 'venda' ? 'py-2 px-6 font-semibold border-b-2 border-brand-blue text-brand-blue' : 'py-2 px-6 font-semibold text-slate-500 border-b-2 border-transparent';
+            document.getElementById('tab-locacao').className = type === 'locacao' ? 'py-2 px-6 font-semibold border-b-2 border-brand-blue text-brand-blue' : 'py-2 px-6 font-semibold text-slate-500 border-b-2 border-transparent';
+        }
+
+        function executeSearch() {
+            showSection('imoveis');
+            document.getElementById('filter-finalidade').value = activeSearchType === 'venda' ? 'Venda' : 'Locação';
+            document.getElementById('filter-tipo').value = document.getElementById('search-tipo').value;
+            applyFilters();
+        }
+
+        // VER DETALHES DO IMÓVEL (PÁGINA INDIVIDUAL)
+        function viewPropertyDetails(id) {
+            const p = properties.find(item => item.id === id);
+            if (!p) return;
+
+            const container = document.getElementById('detalhe-container');
+            const message = encodeURIComponent(`Olá! Tenho interesse no imóvel código ${p.codigo} (${p.titulo}). Gostaria de mais informações.`);
+
+            container.innerHTML = `
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-white rounded-xl overflow-hidden border shadow-sm">
+                            <img src="${p.imagem}" class="w-full h-[400px] object-cover" alt="${p.titulo}">
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border shadow-sm">
+                            <span class="text-xs font-bold bg-brand-navy text-white px-2.5 py-1 rounded uppercase">${p.finalidade}</span>
+                            <h1 class="text-2xl font-bold text-brand-navy mt-3">${p.titulo}</h1>
+                            <p class="text-slate-500 text-sm mb-4"><i class="fa-solid fa-location-dot"></i> ${p.bairro}, ${p.cidade}</p>
+                            
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-slate-50 p-4 rounded-lg my-6 text-center text-sm">
+                                <div><span class="block font-bold text-brand-navy">${p.areaConstruida} m²</span><span class="text-xs text-slate-500">Área Construída</span></div>
+                                <div><span class="block font-bold text-brand-navy">${p.areaTerreno} m²</span><span class="text-xs text-slate-500">Área Terreno</span></div>
+                                <div><span class="block font-bold text-brand-navy">${p.quartos}</span><span class="text-xs text-slate-500">Quartos</span></div>
+                                <div><span class="block font-bold text-brand-navy">${p.garagem}</span><span class="text-xs text-slate-500">Vagas</span></div>
+                            </div>
+
+                            <h3 class="font-bold text-brand-navy mb-2">Características do Imóvel</h3>
+                            <div class="flex flex-wrap gap-2">
+                                ${p.caracteristicas.map(c => `<span class="bg-slate-100 text-slate-700 text-xs px-3 py-1.5 rounded-full"><i class="fa-solid fa-check text-green-500 mr-1"></i>${c}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-xl border shadow-sm sticky top-24">
+                            <span class="text-xs text-slate-400 block font-semibold">CÓDIGO: ${p.codigo}</span>
+                            <div class="text-3xl font-extrabold text-brand-blue my-2">R$ ${p.valor.toLocaleString('pt-BR')}${p.finalidade === 'Locação' ? '/mês' : ''}</div>
+                            <hr class="my-4">
+                            <h4 class="font-bold text-brand-navy mb-4">Gostou deste imóvel?</h4>
+                            <a href="https://wa.me/5544991579229?text=${message}" target="_blank" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg flex items-center justify-center space-x-2 mb-3 transition">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                                <span>Chamar no WhatsApp</span>
+                            </a>
+                            <button onclick="alert('Solicitação enviada com sucesso! Nossos corretores entrarão em contato.')" class="w-full bg-brand-navy hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
+                                Tenho Interesse / Agendar Visita
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            showSection('detalhe');
+        }
+
+        // FAVORITOS
+        function toggleFavorite(id) {
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(favId => favId !== id);
+            } else {
+                favorites.push(id);
+            }
+            localStorage.setItem('habitar_favorites', JSON.stringify(favorites));
+            updateFavCount();
+            renderFeatured();
+            applyFilters();
+        }
+
+        function updateFavCount() {
+            document.getElementById('fav-count').innerText = favorites.length;
+        }
+
+        function renderFavorites() {
+            const favProperties = properties.filter(p => favorites.includes(p.id));
+            const grid = document.getElementById('grid-favoritos');
+            if (favProperties.length === 0) {
+                grid.innerHTML = '<p class="col-span-full text-slate-500">Você ainda não salvou nenhum imóvel nos favoritos.</p>';
+                return;
+            }
+            grid.innerHTML = favProperties.map(createPropertyCard).join('');
+        }
+
+        // PAINEL ADMINISTRATIVO (CRUD SIMULADO)
+        function toggleAdminModal() {
+            document.getElementById('modal-admin').classList.toggle('hidden');
+        }
+
+        function updateDashMetrics() {
+            document.getElementById('dash-total').innerText = properties.length;
+            document.getElementById('dash-venda').innerText = properties.filter(p => p.finalidade === 'Venda').length;
+            document.getElementById('dash-locacao').innerText = properties.filter(p => p.finalidade === 'Locação').length;
+
+            const tbody = document.getElementById('adm-table-body');
+            tbody.innerHTML = properties.map(p => `
+                <tr class="border-b">
+                    <td class="p-2 font-mono">${p.codigo}</td>
+                    <td class="p-2 font-semibold">${p.titulo}</td>
+                    <td class="p-2">${p.tipo} (${p.finalidade})</td>
+                    <td class="p-2">R$ ${p.valor.toLocaleString('pt-BR')}</td>
+                    <td class="p-2">
+                        <button onclick="excluirImovel(${p.id})" class="text-red-500 hover:underline"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function cadastrarImovelAdmin(e) {
+            e.preventDefault();
+            const newProp = {
+                id: Date.now(),
+                codigo: document.getElementById('adm-codigo').value,
+                finalidade: document.getElementById('adm-finalidade').value,
+                tipo: document.getElementById('adm-tipo').value,
+                titulo: document.getElementById('adm-titulo').value,
+                bairro: document.getElementById('adm-bairro').value,
+                cidade: "Goioerê",
+                valor: parseFloat(document.getElementById('adm-valor').value),
+                areaConstruida: parseFloat(document.getElementById('adm-area').value) || 0,
+                areaTerreno: parseFloat(document.getElementById('adm-area').value) || 0,
+                quartos: parseInt(document.getElementById('adm-quartos').value) || 0,
+                banheiros: 1,
+                garagem: 1,
+                imagem: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80",
+                caracteristicas: ["Excelente Localização"]
+            };
+
+            properties.push(newProp);
+            saveProperties();
+            e.target.reset();
+            alert("Imóvel cadastrado com sucesso!");
+        }
+
+        function excluirImovel(id) {
+            if (confirm("Tem certeza que deseja excluir este imóvel?")) {
+                properties = properties.filter(p => p.id !== id);
+                saveProperties();
+            }
+        }
+
+        function handleFormSubmit(e, tipo) {
+            e.preventDefault();
+            alert(`Obrigado! Seu formulário de (${tipo}) foi enviado com sucesso. Nossa equipe entrará em contato.`);
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
